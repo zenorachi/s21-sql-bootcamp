@@ -1,26 +1,12 @@
-WITH visit_by_males AS
-    (SELECT pz.name AS pizzeria_name
-     FROM pizzeria pz
+SELECT pizzeria_name
+FROM (
+    SELECT pz.name AS pizzeria_name,
+           SUM(CASE WHEN p.gender = 'male' THEN 1 ELSE 0 END) AS male_visits,
+           SUM(CASE WHEN p.gender = 'female' THEN 1 ELSE 0 END) AS female_visits
+    FROM pizzeria pz
         JOIN person_visits pv on pz.id = pv.pizzeria_id
         JOIN person p on pv.person_id = p.id
-                             AND p.gender = 'male'),
-    visit_by_females AS
-    (SELECT pz.name AS pizzeria_name
-     FROM pizzeria pz
-        JOIN person_visits pv on pz.id = pv.pizzeria_id
-        JOIN person p on pv.person_id = p.id
-                             AND p.gender = 'female')
-(SELECT pizzeria_name
-FROM visit_by_males EXCEPT ALL (
-        SELECT *
-        FROM visit_by_females
-    )
-)
-UNION ALL
-(SELECT pizzeria_name
-FROM visit_by_females EXCEPT ALL (
-        SELECT *
-        FROM visit_by_males
-    )
-)
+    GROUP BY pizzeria_name
+) AS visit_count
+WHERE male_visits > female_visits OR female_visits > male_visits
 ORDER BY pizzeria_name;
