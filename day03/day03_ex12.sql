@@ -15,4 +15,4 @@ WHERE m.pizza_name = 'greek pizza';
 
 -- DELETE --
 DELETE FROM person_order po
-WHERE po.menu_id IN (SELECT m.id FROM menu m WHERE m.pizza_name = 'greek pizza')
+WHERE po.menu_id IN (SELECT m.id FROM menu m WHERE m.pizza_name = 'greek pizza');
