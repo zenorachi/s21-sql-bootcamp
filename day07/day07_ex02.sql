@@ -6,7 +6,7 @@ WITH visits AS (SELECT pz.name,
                 GROUP BY pz.name, pizzeria_id
                 ORDER BY count DESC
                 LIMIT 3),
-     ordres AS (SELECT pz.name,
+     orders AS (SELECT pz.name,
                        COUNT(pz.name),
                        'order' AS action_type
                 FROM person_order po
@@ -19,5 +19,5 @@ SELECT *
 FROM visits
 UNION ALL
 SELECT *
-FROM ordres
+FROM orders
 ORDER BY action_type ASC, count DESC;
