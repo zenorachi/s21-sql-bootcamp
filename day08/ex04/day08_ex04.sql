@@ -1,14 +1,14 @@
 -- Session 1
-BEGIN;
+BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 
 -- Session 2
-BEGIN;
+BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 
 -- Session 1
 SELECT * from pizzeria WHERE name = 'Pizza Hut';
 
 -- Session 2
-UPDATE pizzeria SET rating = 3.6 WHERE name = 'Pizza Hut'; 
+UPDATE pizzeria SET rating = 3.0 WHERE name = 'Pizza Hut'; 
 COMMIT;
 
 -- Session 1
