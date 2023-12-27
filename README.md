@@ -1,2 +1,2 @@
 # S21 SQL Bootcamp
-This repositoty will hosts tasks from School21 SQL bootcamp 
+This repository will hosts tasks from School21 SQL bootcamp 
